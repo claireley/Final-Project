@@ -7,7 +7,10 @@ data:
         file5: "../data/raw/bank-full.csv"
         file6: "../data/raw/bank-additional.csv"
         file7: "../data/raw/bank-additional-full.csv"
+        file8: "../data/raw/marketing_campaign.csv"
     clean:
         file1: "../data/clean/leadscoring.csv"
         file2: "../data/clean/bank-full.csv"
         file3: "../data/clean/ready_to_model.csv"
+        file4: "../data/clean/ready_to_model_all_cols.csv"
+        file5: "../data/clean/marketing_campaign.csv"
