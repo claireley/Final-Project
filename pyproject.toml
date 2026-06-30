@@ -10,6 +10,7 @@ dependencies = [
     "jupyter>=1.1.1",
     "mlstatkit>=0.1.91",
     "pandas>=3.0.3",
+    "pathlib>=1.0.1",
     "permetrics==2.0.0",
     "plotly>=6.8.0",
     "scikit-learn>=1.9.0",
