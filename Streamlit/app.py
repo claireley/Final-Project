@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
+from pathlib import Path
 
 from backend import (
     CLUSTER_COLORS, CLUSTER_LABELS, CLUSTER_PERSONAS,
@@ -69,11 +70,16 @@ h1,h2,h3 {{ color:{TEXT} !important; }}
 """, unsafe_allow_html=True)
 
 # ── Data & sidebar ─────────────────────────────────────────────────────────────
+
+#def load_real_data() -> pd.DataFrame:
+#    return pd.read_csv("../data/clean/data_w_cluster.csv", sep=";")
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = BASE_DIR / "data" / "clean" / "data_w_cluster.csv"
 @st.cache_data
 def load_real_data() -> pd.DataFrame:
-    return pd.read_csv("../data/clean/data_w_cluster.csv", sep=";")
-
-
+    return pd.read_csv(DATA_PATH, sep=";")
+    
 df = load_real_data()
 df['Cluster_Label']= df.Cluster+1
 

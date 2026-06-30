@@ -6,6 +6,7 @@ Swap generate_data() for pd.read_csv() once your real cleaned file is ready.
 
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
 # ── Design tokens (shared) ─────────────────────────────────────────────────────
 CLUSTER_COLORS = {
@@ -91,9 +92,13 @@ FEATURE_IMPORTANCES = {
 }
 
 # ── Data ───────────────────────────────────────────────────────────────────────
-def load_real_data() -> pd.DataFrame:
-    return pd.read_csv("../data/clean/data_w_cluster.csv", sep=";")
+# def load_real_data() -> pd.DataFrame:
+#     return pd.read_csv("../data/clean/data_w_cluster.csv", sep=";")
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = BASE_DIR / "data" / "clean" / "data_w_cluster.csv"
 
+def load_real_data() -> pd.DataFrame:
+    return pd.read_csv(DATA_PATH, sep=";")
 
 # ── ROI computation ────────────────────────────────────────────────────────────
 def compute_roi(sample_size, avg_price, avg_margin, cost_per_contact,
