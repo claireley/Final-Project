@@ -79,14 +79,14 @@ DATA_PATH = BASE_DIR / "data" / "clean" / "data_w_cluster.csv"
 @st.cache_data
 def load_real_data() -> pd.DataFrame:
     return pd.read_csv(DATA_PATH, sep=";")
-    
+img_path = BASE_DIR / "Streamlit" / "sk_logo.png"    
 df = load_real_data()
 df['Cluster_Label']= df.Cluster+1
 
 with st.sidebar:
     left, center, right = st.columns([1, 2, 1])
     with center:
-        st.image("sk_logo.png", width=120)
+        st.image(img_path, width=120)
     st.sidebar.markdown(
     f"""
     <div style="
