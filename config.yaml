@@ -14,3 +14,4 @@ data:
         file3: "../data/clean/ready_to_model.csv"
         file4: "../data/clean/ready_to_model_all_cols.csv"
         file5: "../data/clean/marketing_campaign.csv"
+        file6: "../data/clean/CP_ready_to_model.csv"
