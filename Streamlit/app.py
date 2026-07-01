@@ -1,5 +1,5 @@
 """
-app.py  —  Is the Behavioural Score Dead?
+app.py  —  Sci-Kitchen Luxury Foods
 Three-page Streamlit dashboard.
 Run with:  streamlit run app.py
 """
@@ -32,29 +32,39 @@ st.set_page_config(
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-html, body, [class*="css"] {{ font-family:'Inter',sans-serif; background:{BG}; color:{TEXT}; }}
+html, body, [class*="css"] {{ font-family:'Inter',serif; background:{BG}; color:{TEXT}; }}
 .stApp {{ background:{BG}; }}
 section[data-testid="stSidebar"] {{ background:{CARD}; border-right:1px solid {BORDER}; }}
 h1,h2,h3 {{ color:{TEXT} !important; }}
 .stSelectbox label,.stSlider label,.stRadio label {{ color:{TEXT} !important; font-size:0.8rem !important; }}
+
+
+header {{
+    visibility: hidden;
+}}
+
+.block-container {{
+    padding-top: 1rem;
+}}
+
 
 .metric-card {{
   background:{MUTED}; border:1px solid {BORDER}; border-radius:10px;
   padding:1.2rem 1.4rem; margin-bottom:0.75rem;
 }}
 .metric-label {{
-  font-size:0.72rem; font-weight:600; letter-spacing:0.08em;
+  font-size:0.82rem; font-weight:600; letter-spacing:0.08em;
   text-transform:uppercase; color:{CARD}; margin-bottom:0.3rem;
 }}
 .metric-value {{
   font-family:'JetBrains Mono',monospace; font-size:1.6rem;
   font-weight:500; color:{TEXT}; line-height:1;
 }}
-.metric-sub {{ font-size:0.75rem; color:{CARD}; margin-top:0.25rem; }}
+.metric-sub {{ font-size:1.0rem; color:{CARD}; margin-top:0.25rem; }}
 
 .cluster-badge {{
   display:inline-block; padding:0.2rem 0.65rem; border-radius:20px;
-  font-size:0.7rem; font-weight:600; letter-spacing:0.05em; margin-bottom:0.5rem;
+  font-size:0.83rem; font-weight:600; letter-spacing:0.05em; margin-bottom:0.5rem;
 }}
 .section-header {{
   font-size:0.7rem; font-weight:700; letter-spacing:0.12em;
@@ -104,11 +114,14 @@ with st.sidebar:
     unsafe_allow_html=True
 )
     st.sidebar.markdown("---")
-    st.markdown(f"<div style='font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:{MUTED};margin-bottom:0.5rem'>Navigation</div>", unsafe_allow_html=True)
-    page = st.radio("", ["Customer Insights", "Model Comparison", "ROI Calculator"],
+    st.markdown(f"<div style='font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:{MUTED};margin-bottom:0.5rem'>Navigation</div>", unsafe_allow_html=True)
+    page = st.pills("", ["Customer Insights", 
+                         "Comparison of Models", 
+                         "ROI Calculator"], default="Customer Insights",
                     label_visibility="collapsed")
     st.markdown("---")
-    st.markdown(f"<div style='font-size:0.65rem;color:{MUTED};line-height:1.8'>Customer Personality Analysis<br>n = {len(df):,} customers<br>3 demographic clusters<br>XGBoost · AUC 0.90</div>",
+    st.markdown(f"""<div style='font-size:0.8rem;color:{MUTED};line-height:1.8'>Kaggle: <a href="https://www.kaggle.com/datasets/imakash3011/customer-personality-analysis" 
+                target="_blank" style="color:{MUTED};"> Customer Personality Analysis</a><br>n = {len(df):,} customers<br>3 demographic clusters<br>XGBoost · AUC 0.90</div>""",
                 unsafe_allow_html=True)
     st.markdown(
     f"""
@@ -139,8 +152,8 @@ def dark_layout(fig, title=None, height=340, **extra):
         height=height,
         **extra,
     )
-    fig.update_xaxes(gridcolor=BORDER, showline=False)
-    fig.update_yaxes(gridcolor=BORDER, showline=False)
+    fig.update_xaxes(gridcolor=BORDER, showline=False, zeroline=False)
+    fig.update_yaxes(gridcolor=BORDER, showline=False, zeroline=False)
     return fig
 
 def kpi(col, label, value, sub, top_color=None):
@@ -188,7 +201,7 @@ if page == "Customer Insights":
             <div class="metric-card" style="border-top:3px solid {clr}">
               <div class="cluster-badge" style="background:{clr}22;color:{clr}">{CLUSTER_LABELS[c]}</div>
               <div style="font-size:1.1rem;font-weight:600;margin-bottom:0.2rem">{p['name']}, {p['age']}</div>
-              <div style="font-size:0.8rem;color:{CARD};line-height:1.5;margin-bottom:1rem">{p['bio']}</div>
+              <div style="font-size:0.9rem;color:{CARD};line-height:1.5;margin-bottom:1rem">{p['bio']}</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
                 <div><div class="metric-label">Income</div>
                      <div style="font-family:monospace;font-size:1rem">€{cdf['income'].mean():,.0f}</div></div>
@@ -206,6 +219,7 @@ if page == "Customer Insights":
     # Row 1: scatter + response by web visits
     rc1, rc2 = st.columns(2)
     with rc1:
+        df.Cluster_Label= df.Cluster_Label.astype(str)
         fig = px.scatter(view, x="income", y="total_spend", color="Cluster_Label",
                          color_discrete_map=CLUSTER_COLORS, 
                          opacity=0.45,
@@ -260,14 +274,14 @@ if page == "Customer Insights":
                 line_color=CLUSTER_COLORS[c], fillcolor=CLUSTER_COLORS[c],
             ))
         fig4.update_layout(
-            title=dict(text="Spending & Income Profile", font=dict(size=13)),
+            title=dict(text="Spending Profile", font=dict(size=13)),
             polar=dict(bgcolor="rgba(0,0,0,0)",
                        radialaxis=dict(visible=True, gridcolor=BORDER, color=CARD),
                        angularaxis=dict(gridcolor=BORDER, color=TEXT)),
             paper_bgcolor="rgba(0,0,0,0)",
             font=dict(color=TEXT, size=11),
             legend=dict(bgcolor="rgba(0,0,0,0)"),
-            margin=dict(l=10, r=10, t=40, b=10), height=340,
+            margin=dict(l=10, r=10, t=40, b=30), height=340,
         )
         st.plotly_chart(fig4, width="stretch")
 
@@ -280,7 +294,7 @@ if page == "Customer Insights":
 # ══════════════════════════════════════════════════════════════════════════════
 # PAGE 2 — MODEL COMPARISON
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "Model Comparison":
+elif page == "Comparison of Models":
     st.markdown("## Model Comparison")
     st.markdown(f"<div style='color:{CARD};font-size:0.9rem;margin-bottom:1.5rem'>"
                 "Three classifiers were evaluated on the dataset. "
@@ -324,11 +338,12 @@ elif page == "Model Comparison":
         ))
         dark_layout(fig_fi, "Feature Importances", height=400,
                     xaxis=dict(title="Importance", gridcolor=BORDER),
-                    yaxis=dict(gridcolor="rgba(0,0,0,0)"))
+                    yaxis=dict(gridcolor="rgba(0,0,0,0)",showgrid=False)
+                    )           
         st.plotly_chart(fig_fi, width="stretch")
         st.markdown(f"<div style='font-size:0.78rem;color:{CARD};margin-top:-0.5rem'>"
                     "<span style='color:#F59E0B'>■</span> Customer segment outranks all but one demographic"
-                    " metric, and is the fourth most predictive, showing it's ability to summarise values.</div>",
+                    " metric, and is the fourth most predictive, showing it's ability to capture meaningful variation.</div>",
                     unsafe_allow_html=True)
 
     with fa2:
@@ -345,7 +360,7 @@ elif page == "Model Comparison":
                     "Feature Set Ablation — Random Forest (tuned)",
                     height=400,
                     yaxis=dict(title="ROC-AUC", gridcolor=BORDER, range=[0.5, 1.0]),
-                    xaxis=dict(gridcolor="rgba(0,0,0,0)", tickfont=dict(size=10)),
+                    xaxis=dict(gridcolor="rgba(0,0,0,0.01)", tickfont=dict(size=10)),
                     showlegend=False)
         st.plotly_chart(fig_abl, width="stretch")
         st.markdown(f"<div style='font-size:0.78rem;color:{CARD};margin-top:-0.5rem'>"
