@@ -103,7 +103,7 @@ A Streamlit app translates the model output into business decisions:
   cost-per-contact to see projected net profit, wasted spend, and missed
   revenue by model choice
 
-**Live app:** `[add Streamlit deployment link]`
+**Live app:** `https://sci-kitchen-marketing.streamlit.app/`
 
 ## Recommendations
 
@@ -122,16 +122,44 @@ A Streamlit app translates the model output into business decisions:
 ## Project structure
 
 ```
-├── config.yaml              # data paths
-├── data/
-│   ├── raw/                 # original Kaggle export
-│   └── clean/                # outputs of each notebook stage
-├── notebooks/
-│   ├── CP_data_cleaning.ipynb
-│   ├── cp_eda.ipynb
-│   └── cp_modeling.ipynb
-├── figures/                 # saved chart exports (PCA loadings, ablation, model comparison)
-└── streamlit_app/           # ROI calculator & dashboard
+Final-Project
+├─ .devcontainer
+│  └─ devcontainer.json
+├─ .python-version
+├─ config.yaml
+├─ data
+│  ├─ clean
+│  │  ├─ bank-full.csv
+│  │  ├─ CP_ready_to_model.csv
+│  │  ├─ data_w_cluster.csv
+│  │  └─ marketing_campaign.csv
+│  └─ raw
+│     └─ marketing_campaign.csv
+├─ figures
+│  ├─ model-comparison.png
+│  ├─ pca_clusters.png
+│  ├─ pca_heatmap.png
+│  ├─ pca_loadings.png
+│  └─ rf-ablation.png
+├─ main.py
+├─ notebooks
+│  ├─ CP_data_cleaning.ipynb
+│  ├─ cp_eda.ipynb
+│  ├─ cp_modeling.ipynb
+│  ├─ data_cleaning_bank.ipynb
+│  ├─ eda_bank.ipynb
+│  └─ Modeling-Bank.ipynb
+├─ pyproject.toml
+├─ README.md
+├─ slides
+│  └─ Sci-Kitchen Predictive Segmentation Ironhack.pdf
+├─ sql
+│  └─ ERD.PNG
+├─ Streamlit
+│  ├─ app.py
+│  ├─ backend.py
+│  └─ sk_logo.png
+└─ uv.lock
 ```
 
 ## Setup
@@ -144,6 +172,18 @@ output to `data/clean/` for the next stage to pick up.
 
 Python · pandas · scikit-learn · XGBoost · MLstatkit (DeLong's test) · seaborn
 · Streamlit
+
+## Streamlit App:
+
+https://sci-kitchen-marketing.streamlit.app/
+
+## Presentation:
+
+https://docs.google.com/presentation/d/1dWVvAv2vGfaGUOFkyGPvL1H8IeCHtUdMcdxGqaW5QsY/edit?usp=sharing
+
+## Trello:
+
+https://trello.com/invite/b/6a3bc9202267f2d1c89e611e/ATTIadab59b15dc491d32a95f958fd587f8e1B325FD0/final-rncp-project
 
 ---
 *Ironhack Data Analytics Bootcamp — Final Project*
