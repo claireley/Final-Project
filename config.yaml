@@ -1,17 +1,8 @@
 data:
     raw:
-        file1: "../data/raw/LeadScoring.csv"
-        file2: "../data/raw/Leads_Data_Dictionary.csv"
-        file3: "../data/raw/digital_marketing_campaign_dataset.csv"
-        file4: "../data/raw/bank.csv"
-        file5: "../data/raw/bank-full.csv"
-        file6: "../data/raw/bank-additional.csv"
-        file7: "../data/raw/bank-additional-full.csv"
-        file8: "../data/raw/marketing_campaign.csv"
+        file1: "../data/raw/marketing_campaign.csv"
     clean:
-        file1: "../data/clean/leadscoring.csv"
+        file1: "../data/clean/marketing_campaign.csv"
         file2: "../data/clean/bank-full.csv"
-        file3: "../data/clean/ready_to_model.csv"
-        file4: "../data/clean/ready_to_model_all_cols.csv"
-        file5: "../data/clean/marketing_campaign.csv"
-        file6: "../data/clean/CP_ready_to_model.csv"
+        file3: "../data/clean/CP_ready_to_model.csv"
+        file4: "../data/clean/data_w_cluster.csv"
