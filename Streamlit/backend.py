@@ -10,9 +10,13 @@ from pathlib import Path
 
 # ── Design tokens (shared) ─────────────────────────────────────────────────────
 CLUSTER_COLORS = {
-    0: "#F59E0B",   # amber   — decisive buyers
-    1: "#10B981",   # emerald — browsers
-    2: "#8B5CF6",   # violet  — family spenders
+    # 0: "#F59E0B",   # amber   — decisive buyers
+    # 1: "#10B981",   # emerald — browsers
+    # 2: "#8B5CF6",   # violet  — family spenders
+
+    0: "#6D1F3A",  # Deep Burgundy
+    1: "#988E6E", # Khaki Gold
+    2: "#4A6B6C",   # Muted Teal
 }
 CLUSTER_LABELS = {
     0: "Segment 1 — The Decisive Buyers",
@@ -60,10 +64,15 @@ MODEL_RESULTS = {
     "XGBoost":             {"auc": 0.902, "precision": 0.74, "recall": 0.45, "f1": 0.56},
 }
 MODEL_COLORS = {
-    "Logistic Regression": "#6B7280",
-    "Random Forest":       "#3B82F6",
-    "XGBoost":             "#10B981",
+    # "Logistic Regression": "#6B7280",
+    # "Random Forest":       "#3B82F6",
+    # "XGBoost":             "#10B981",
+
+    "Logistic Regression": '#A4A4A4',
+    "Random Forest":       '#988E6E',
+    "XGBoost":             '#6D1F3A',
 }
+
 
 # Feature ablation results (Random Forest, tuned, same hyperparams across all)
 ABLATION = {
@@ -72,7 +81,8 @@ ABLATION = {
     "C — First-party CRM\n(what we already know)": 0.809,
     "Global — All Features":                       0.873,
 }
-ABLATION_COLORS = ["#6B7280", "#F59E0B", "#3B82F6", "#10B981"]
+# ABLATION_COLORS = ["#6B7280", "#F59E0B", "#3B82F6", "#10B981"]
+ABLATION_COLORS = ["#2B2B2B", "#2B2B2B", "#2B2B2B", "#6D1F3A"]
 
 # XGBoost feature importances (global model)
 FEATURE_IMPORTANCES = {

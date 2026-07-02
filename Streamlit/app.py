@@ -16,7 +16,7 @@ from backend import (
     BG, CARD, BORDER, TEXT, MUTED,
     MODEL_RESULTS, MODEL_COLORS,
     ABLATION, ABLATION_COLORS,
-    FEATURE_IMPORTANCES,
+    FEATURE_IMPORTANCES, 
     load_real_data, compute_roi,
 )
 
@@ -219,9 +219,9 @@ if page == "Customer Insights":
     # Row 1: scatter + response by web visits
     rc1, rc2 = st.columns(2)
     with rc1:
-        df.Cluster_Label= df.Cluster_Label.astype(str)
+        df.Cluster_Label= df.Cluster_Label.astype(str)       
         fig = px.scatter(view, x="income", y="total_spend", color="Cluster_Label",
-                         color_discrete_map=CLUSTER_COLORS, 
+                         color_discrete_sequence=["#6D1F3A","#988E6E","#4A6B6C"],
                          opacity=0.45,
                          labels={"income":"Annual Income (€)","total_spend":"Total Spend (€)","Cluster_Label":"Segment"},
                          title="Income vs Total Spend")
@@ -235,7 +235,7 @@ if page == "Customer Insights":
         wr = view.groupby(web_bins, observed=True)["response"].mean().reset_index()
         fig2 = go.Figure(go.Bar(
             x=wr["webvisits"].astype(str), y=wr["response"],
-            marker_color="#3B82F6", marker_line_width=0,
+            marker_color="#393636", marker_line_width=0,
             text=[f"{v:.0%}" for v in wr["response"]], textposition="outside",
             textfont=dict(color=TEXT),
         ))
@@ -326,7 +326,7 @@ elif page == "Comparison of Models":
     with fa1:
         features     = list(FEATURE_IMPORTANCES.keys())
         importances  = list(FEATURE_IMPORTANCES.values())
-        feat_colors  = ["#F59E0B" if f == "Segment" else "#3B82F6" for f in features]
+        feat_colors  = ["#6D1F3A" if f == "Segment" else "#2B2B2B" for f in features]
         fig_fi = go.Figure(go.Bar(
             x=importances[::-1], y=features[::-1],
             orientation="h",
@@ -396,7 +396,7 @@ elif page == "ROI Calculator":
         avg_margin       = st.slider("Product margin (%)",         10,     80,   40,    5)
     with s2:
         base_rate        = st.slider("Predicted conversion rate (%)",   5,     20,   15,    5)
-        cost_per_contact = st.slider("Cost per contact (€)",      0.5,   20.0,  3.0,  0.5)
+        cost_per_contact = st.slider("Cost per contact (€)",      0.5,   60.0,  3.0,  5.0)
         model_choice     = st.select_slider(
             "Model",
             options=["Logistic Regression", "Random Forest", "XGBoost"],
