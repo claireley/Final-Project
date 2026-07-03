@@ -35,7 +35,7 @@ CLUSTER_PERSONAS = {
     1: {
         "name": "Sofia", "age": "35",
         "bio": (
-            "Teacher, two kids, rents in Lisbon suburbs. Browses extensively "
+            "Teacher, two kids, rents in the suburbs. Browses extensively "
             "online — comparing prices, reading reviews, adding to wishlists. "
             "Rarely converts. High digital footprint, low purchase value."
             
@@ -60,7 +60,7 @@ MUTED  = "#e8ecf4"
 # ── Model results (from your actual notebook) ──────────────────────────────────
 MODEL_RESULTS = {
     "Logistic Regression": {"auc": 0.862, "precision": 0.75, "recall": 0.42, "f1": 0.53},
-    "Random Forest":       {"auc": 0.885, "precision": 0.74, "recall": 0.45, "f1": 0.56},
+    "Random Forest":       {"auc": 0.885, "precision": 0.69, "recall": 0.45, "f1": 0.54},
     "XGBoost":             {"auc": 0.902, "precision": 0.74, "recall": 0.45, "f1": 0.56},
 }
 MODEL_COLORS = {
