@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "datasets>=5.0.0",
+    "fastapi>=0.139.0",
     "hdbscan>=0.8.44",
     "imblearn>=0.0",
     "jupyter>=1.1.1",
@@ -14,8 +15,11 @@ dependencies = [
     "pathlib>=1.0.1",
     "permetrics==2.0.0",
     "plotly>=6.8.0",
+    "pymysql>=1.2.0",
+    "python-dotenv>=1.2.2",
     "scikit-learn>=1.9.0",
     "seaborn>=0.13.2",
     "streamlit>=1.58.0",
+    "uvicorn>=0.49.0",
     "xgboost>=3.3.0",
 ]

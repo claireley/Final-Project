@@ -6,3 +6,5 @@ data:
         file2: "../data/clean/bank-full.csv"
         file3: "../data/clean/CP_ready_to_model.csv"
         file4: "../data/clean/data_w_cluster.csv"
+        file5: "../data/clean/bank-ready_to_model.csv"
+        file6: "../data/clean/job_salaries_scraped.csv"

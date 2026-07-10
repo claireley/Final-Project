@@ -1,0 +1,98 @@
+CREATE SCHEMA IF NOT EXISTS ironhack_final_project;
+USE ironhack_final_project;
+CREATE TABLE IF NOT EXISTS `Behaviour` (
+	`behaviour_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	`recency` INTEGER NOT NULL,
+	`customer_tenure_in_days` INTEGER NOT NULL,
+	`num_camp_success` INTEGER NOT NULL,
+	`response_last_campaign` BOOLEAN NOT NULL,
+	`webvisits` INTEGER NOT NULL,
+	`complain` BOOLEAN NOT NULL,
+	`cust_id` BIGINT UNSIGNED NOT NULL UNIQUE,
+	PRIMARY KEY(`behaviour_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `Channels` (
+	`purchasing_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	`web` INTEGER NOT NULL,
+	`store` INTEGER NOT NULL,
+	`catalogue` INTEGER NOT NULL,
+	`cust_id` BIGINT UNSIGNED NOT NULL UNIQUE,
+	PRIMARY KEY(`purchasing_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `Product_spend` (
+	`purchases_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+	`deals` INTEGER NOT NULL,
+	`fruits` DECIMAL NOT NULL,
+	`wines` DECIMAL NOT NULL,
+	`sweets` DECIMAL NOT NULL,
+	`meat` DECIMAL NOT NULL,
+	`gold` DECIMAL NOT NULL,
+	`fish` DECIMAL NOT NULL,
+	`cust_id` BIGINT UNSIGNED NOT NULL UNIQUE,
+	PRIMARY KEY(`purchases_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `Customer` (
+	`cust_id` BIGINT UNSIGNED NOT NULL,
+	`education` VARCHAR(255) NOT NULL,
+	`year_birth` YEAR NOT NULL,
+	`num_children` INTEGER NOT NULL,
+	`income` INTEGER NOT NULL,
+	`cluster_id` INTEGER UNSIGNED NOT NULL,
+	PRIMARY KEY(`cust_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `Cluster` (
+	`Cluster_id` INTEGER UNSIGNED NOT NULL UNIQUE,
+	`Cluster_name` VARCHAR(255) NOT NULL,
+	PRIMARY KEY(`Cluster_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `Bank_Customer` (
+	`bank_cust_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`age` INTEGER NOT NULL,
+	`job` VARCHAR(255) NOT NULL,
+	`marital` VARCHAR(255) NOT NULL,
+	`education` VARCHAR(255) NOT NULL,
+	`balance` INTEGER NOT NULL,
+	`housing` BOOLEAN NOT NULL,
+	`loan` BOOLEAN NOT NULL,
+	`default` BOOLEAN NOT NULL,
+	`campaign` INTEGER NOT NULL,
+	`pdays` INTEGER NOT NULL,
+	`previous` INTEGER NOT NULL,
+	`poutcome` VARCHAR(255) NOT NULL,
+	`conversion` BOOLEAN NOT NULL,
+	PRIMARY KEY(`bank_cust_id`)
+);
+
+
+CREATE TABLE IF NOT EXISTS `Bank_Salary` (
+	`job` VARCHAR(255) NOT NULL UNIQUE,
+	`income` DECIMAL NOT NULL,
+	PRIMARY KEY(`job`)
+);
+
+
+ALTER TABLE `Bank_Customer`
+ADD FOREIGN KEY(`job`) REFERENCES `Bank_Salary`(`job`)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE `Behaviour`
+ADD FOREIGN KEY(`cust_id`) REFERENCES `Customer`(`cust_id`)
+ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE `Channels`
+ADD FOREIGN KEY(`cust_id`) REFERENCES `Customer`(`cust_id`)
+ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE `Product_spend`
+ADD FOREIGN KEY(`cust_id`) REFERENCES `Customer`(`cust_id`)
+ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE `Customer`
+ADD FOREIGN KEY(`cluster_id`) REFERENCES `Cluster`(`Cluster_id`)
+ON UPDATE CASCADE ON DELETE RESTRICT;
