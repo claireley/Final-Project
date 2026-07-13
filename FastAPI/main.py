@@ -25,11 +25,7 @@ def get_db_connection():
     except Exception as e:
         print(f"Error connecting to database: {e}")
         return None
-
-
-@app.get("/")
-def hello():
-    return "Hello world!"    
+  
 
 @app.get("/customer_lifetime_value/{customer_id}")
 def customer_lifetime_value(customer_id: int):
